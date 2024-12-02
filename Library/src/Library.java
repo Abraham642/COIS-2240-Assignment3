@@ -2,17 +2,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Library {
-    private List<Member> members = new ArrayList<Member>();
-    private List<Book> books = new ArrayList<Book>();
+    private List<Member> members = new ArrayList<>();
+    private List<Book> books = new ArrayList<>();
 
     // Add a new member to the library
-    public void addMember(Member member) {
+    public boolean addMember(Member member) {
+        if (findMemberById(member.getId()) != null) {
+            System.out.println("A member with ID " + member.getId() + " already exists. Addition failed.");
+            return false;
+        }
         members.add(member);
+        return true;
     }
-    
+
     // Add a new book to the library
-    public void addBook(Book book) {
+    public boolean addBook(Book book) {
+        if (findBookById(book.getId()) != null) {
+            System.out.println("A book with ID " + book.getId() + " already exists. Addition failed.");
+            return false;
+        }
         books.add(book);
+        return true;
     }
 
     // Find a member by ID
@@ -39,7 +49,7 @@ public class Library {
     public List<Member> getMembers() {
         return members;
     }
-    
+
     // Get the list of books
     public List<Book> getBooks() {
         return books;
